@@ -1,0 +1,40 @@
+---
+title: "実験レポート"
+author: "東京太郎"
+date: "2020/3/18"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+# 目的
+  今回の実験は～～～～～で、～～～～～を～～～するため行った。
+
+
+```{r}
+DT <- diamonds 
+DT
+```
+
+このデータは～～～～なので、～～～である。
+
+```{r}
+ggplot(DT) + geom_point(aes(x = carat,y = price))
+```
+散布図からは、リンク関数をlogとして、分布をガンマとしたものが適切と考えたので、次のようにGLMを実施する。
+
+```{r}
+model <- glm(formula = price ~ carat, 
+             family = "Gamma"(link="log"),
+             data=DT)
+summary(model)
+```
+
+# まとめ・考察
+  今回の結果からは～～～がいえて、～～～～であるといえる。
+～～～であるので、～～～である。
+
+

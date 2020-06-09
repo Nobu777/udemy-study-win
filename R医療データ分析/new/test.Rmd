@@ -1,0 +1,48 @@
+---
+title: "螳滄ｨ薙Ξ繝昴<83>ｼ繝<88>"
+author: "譚ｱ莠ｬ螟ｪ驛<8e>"
+date: "2018蟷ｴ6譛<88>8譌･"
+output:
+  word_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+# 目的
+ 今回の実験は～～～～～で、～～～～～を～～～～するため行った。
+ (００００月００００日)
+
+# データインポート
+```{r}
+DT <- diamonds #read_csv()
+DT
+```
+
+このデータは～～～～で～～～なので・・・
+
+# データの可視化
+
+```{r}
+ggplot(DT) + geom_point(aes(x = carat, y = price))
+```
+
+# GLM
+ 散布図からは、リンク関数をlogとして、分布をガンマとしたものが適切と考えたので、次のようにGLMを実施する。
+ 
+```{r}
+model <- glm(formula = price ~ carat, 
+             family = "Gamma"(link="log"),
+             data = DT)
+
+summary(model)
+```
+
+# まとめ・考察
+　今回の結果からは～～～～～がいえて、～～～～であると考えられる。
+～～～～～であるので、～～～～とする。
+
+
