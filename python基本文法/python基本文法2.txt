@@ -1,0 +1,351 @@
+Python Data Analysis 2
+September 21, 2017
+1 Lec50 行列の生成・演算
+In [ ]: import numpy as np
+In [ ]: arr1 = np.array([1,2,3])
+In [ ]: arr1
+In [ ]: arr2 = np.array([[1,2], [3,4], [5,6]])
+In [ ]: arr2
+In [ ]: arr2.shape
+In [ ]: np.arange(9)
+In [ ]: np.arange(9).reshape(3,3)
+In [ ]: np.zeros(3)
+In [ ]: np.zeros([3,3])
+In [ ]: np.ones([3,3])
+In [ ]: np.empty([3,3])
+In [ ]: np.eye(5)
+In [ ]: arr3 = np.arange(9).reshape(3,3)
+In [ ]: arr3
+In [ ]: arr4 = np.arange(1,10).reshape(3,3)
+In [ ]: arr3 + arr4
+In [ ]: arr4
+In [ ]: arr3 * arr4
+In [ ]: np.dot(arr3, arr4)
+In [ ]: arr3 + 1.0
+In [ ]: arr3
+1
+2 Lec51 行列のインデックス・ブールインデックス参照
+In [ ]: import numpy as np
+In [ ]: arr1 = np.arange(9)
+In [ ]: arr1
+In [ ]: arr1[0]
+In [ ]: arr1[1]
+In [ ]: arr1[3:]
+In [ ]: arr2 = np.arange(9).reshape(3,3)
+In [ ]: arr2
+In [ ]: arr2[0,0]
+In [ ]: arr2[0,1]
+In [ ]: arr2[1,1]
+In [ ]: arr2[0,1:]
+In [ ]: arr2[arr2 > 4]
+In [ ]: arr2 > 4
+In [ ]: arr2
+In [ ]: arr2[arr2 > 4]
+3 Lec52 ユニバーサル関数
+In [ ]: import numpy as np
+In [ ]: arr1 = np.arange(9)
+In [ ]: arr1
+In [ ]: np.square(arr1)
+In [ ]: np.sqrt(arr1)
+In [ ]: np.sin(arr1)
+2
+4 Lec53 行列のファイル入出力
+In [ ]: import numpy as np
+In [ ]: arr1 = np.loadtxt("brownian_x.csv",delimiter= ",", skiprows=1)
+In [ ]: arr1
+In [ ]: np.savetxt("test.txt", arr1, delimiter=",")
+5 Lec54 行列の評価・操作
+In [ ]: import numpy as np
+In [ ]: arr1 = np.random.randn(100)
+In [ ]: arr1
+In [ ]: arr1.mean()
+In [ ]: arr1.std()
+In [ ]: arr1.max()
+In [ ]: arr1.min()
+In [ ]: np.sort(arr1)
+In [ ]: arr2 = np.sort(arr1)
+In [ ]: arr2
+In [ ]: np.where(arr1 > 0, 1, -1)
+In [ ]: np.where(arr1 > 0, True, False)
+6 Lec56 Series の作成
+In [ ]: import numpy as np
+import pandas as pd
+In [ ]: S1 = pd.Series(np.arange(4))
+In [ ]: S1
+In [ ]: S1?
+In [ ]: S2 = pd.Series([1,2,3,4], index = ["a", "b", "c", "d"])
+In [ ]: S2
+3
+In [ ]: S3 = pd.Series()
+In [ ]: S3
+In [ ]: S3["a"] = 1
+In [ ]: S3
+In [ ]: S3["b"] = 2
+In [ ]: S3
+7 Lec57 DataFrame の作成
+In [ ]: import numpy as np
+import pandas as pd
+In [ ]: df1 = pd.DataFrame(np.arange(9).reshape(3,3))
+In [ ]: df1
+In [ ]: df1 = pd.DataFrame(np.arange(9).reshape(3,3),
+index =["a", "b", "c"], columns= ["A", "B", "C"])
+In [ ]: df1
+In [ ]: df2 = pd.DataFrame()
+In [ ]: df2
+In [ ]: df2.ix["a", "A"] = 1
+In [ ]: df2
+8 Lec58 txt, csv, Excel ファイルからの入出力
+In [ ]: import numpy as np
+import pandas as pd
+In [ ]: df_b = pd.read_csv("brownian_x.csv",delimiter=",")
+In [ ]: df_b
+In [ ]: df_p = pd.read_excel("physical_measurement.xlsx", sheetname="Sheet1")
+In [ ]: df_p
+In [ ]: df_b.to_csv("sample.csv", sep=",")
+In [ ]: df_p.to_excel("sample2.xlsx")
+4
+9 Lec59 DataFrame の操作【取得】
+In [ ]: import pandas as pd
+import numpy as np
+%matplotlib inline
+In [ ]: df1 = pd.DataFrame(np.arange(9).reshape(3,3),
+index = ["a", "b", "c"], columns= ["A", "B", "C"])
+In [ ]: df1
+In [ ]: df1.index
+In [ ]: df1.index[0]
+In [ ]: df1.columns
+In [ ]: df1.values
+In [ ]: df1.shape
+In [ ]: df2 = pd.read_excel("physical_measurement.xlsx")
+In [ ]: df2.head()
+In [ ]: df2.tail()
+In [ ]: df2["height"]
+In [ ]: df2["height"].mean()
+In [ ]: df2[df2["height"] > 170]
+In [ ]: df_f = df2[df2["sex"] == "female"]
+In [ ]: df_f
+In [ ]: df_f["height"].hist()
+10 Lec60 DataFrame の操作【インデックス】
+In [ ]: import pandas as pd
+import numpy as np
+In [ ]: df1 = pd.DataFrame(np.arange(16).reshape(4,4))
+In [ ]: df1
+In [ ]: df2 = df1.rename(index={0:"a", 1:"b", 2:"c", 3:"d"},
+columns={0:"A", 1:"B", 2:"C", 3:"D"})
+5
+In [ ]: df2
+In [ ]: df3 = df2.reindex(columns=["D","C","B","A"])
+In [ ]: df2
+In [ ]: df2["B"]
+In [ ]: df2.ix[:,"B"]
+In [ ]: df2.iloc[:,1]
+11 Lec61 DataFrame の操作【変更】
+In [ ]: import numpy as np
+import pandas as pd
+In [ ]: df = pd.read_excel("physical_measurement2.xlsx", index_col=0)
+In [ ]: df
+In [ ]: df2 = df.sort_index()
+In [ ]: df2
+In [ ]: df2.isnull()
+In [ ]: df2.dropna()
+In [ ]: df2.fillna(value=-1.0)
+In [ ]: df2.fillna(method="ffill")
+In [ ]: df3 = df2.fillna(value=df2.mean())
+In [ ]: df3
+In [ ]: df4 = df3.drop_duplicates()
+In [ ]: df4
+In [ ]: df4["sex2"] = df4["sex"].apply(lambda x : np.where(x == "male", 1, -1))
+In [ ]: df4
+In [ ]: del df4["sex"]
+In [ ]: df4
+6
+
+12 Lec62 マルチインデックス
+In [ ]: import pandas as pd
+In [ ]: df = pd.read_excel("bussei.xlsx")
+In [ ]: df
+In [ ]: df1 = pd.read_excel("bussei.xlsx", header = [0,1])
+In [ ]: df1
+In [ ]: df1["water"]["Density"]
+In [ ]: df1["air"]["Viscosity"]
+In [ ]: df1.ix[:,"air"].ix[:,"Viscosity"]
+
+13 Lec63 データのマージ
+In [ ]: import pandas as pd
+In [ ]: df1 = pd.read_excel("physical_measurement2.xlsx")
+In [ ]: df2 = pd.read_excel("blood_type.xlsx")
+In [ ]: df3 = df1.drop_duplicates()
+In [ ]: df3.head()
+In [ ]: df2.head()
+In [ ]: pd.merge(df3, df2, on = "id")
+In [ ]: df3 = pd.read_csv("brownian_1.csv", delimiter=",")
+In [ ]: df4 = pd.read_csv("brownian_2.csv", delimiter=",")
+In [ ]: df3.head()
+In [ ]: df4.head()
+In [ ]: pd.concat([df3,df4])
+7
+
+14 Lec64 ビニング
+In [ ]: import pandas as pd
+import numpy as np
+%matplotlib inline
+In [ ]: df_x = pd.read_csv("brownian_x.csv", delimiter=",", index_col=0)
+In [ ]: df_y = pd.read_csv("brownian_y.csv", delimiter=",", index_col=0)
+In [ ]: df_d = (df_x ** 2 + df_y ** 2) ** 0.5
+In [ ]: df_d
+In [ ]: df_d.ix[500,:].hist()
+In [ ]: bins = np.arange(0, 100, 10)
+In [ ]: bins
+In [ ]: data = pd.cut(df_d.ix[500,:], bins)
+In [ ]: pd.value_counts(data)
+In [ ]: pd.value_counts(data, sort = False)
+
+15 Lec66 グラフの書き方 (基礎編)~scatter, plot, bar~
+In [ ]: import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+In [ ]: df = pd.read_excel("Concentration.xlsx", index_col= 0)
+In [ ]: df.head()
+In [ ]: plt.scatter(df.index, df.ix[:,"C[mol/L]"])
+plt.xlabel("time[s]", fontsize = 16)
+plt.ylabel("C[mol/L]", fontsize = 16)
+In [ ]: plt.plot(df.index, df.ix[:,"C[mol/L]"])
+plt.xlabel("time[s]", fontsize = 16)
+plt.ylabel("C[mol/L]", fontsize = 16)
+In [ ]: plt.bar(df.index, df.ix[:,"C[mol/L]"])
+plt.xlabel("time[s]", fontsize = 16)
+plt.ylabel("C[mol/L]", fontsize = 16)
+In [ ]: x = np.arange(0,15,0.01)
+y = np.exp(-0.1 * x)
+plt.bar(df.index, df.ix[:,"C[mol/L]"])
+plt.plot(x,y, color= "red")
+plt.xlabel("time[s]", fontsize = 16)
+plt.ylabel("C[mol/L]", fontsize = 16)
+8
+
+16 Lec67 グラフの書き方 (基礎編 2)subplot
+In [ ]: import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+In [ ]: x = np.arange(-20,20, 0.01)
+y = 1.0 / (1.0 + np.exp(-x))
+In [ ]: x2 = np.arange(-2.0*np.pi,2.0*np.pi, 0.01 )
+y2 = np.sin(x2)
+In [ ]: plt.subplot(2,1,1)
+plt.plot(x,y)
+plt.subplot(2,1,2)
+plt.plot(x2,y2)
+In [ ]: plt.subplot(2,2,1)
+plt.plot(x,y)
+plt.subplot(2,2,3)
+plt.plot(x2,y2)
+In [ ]: plt.figure(figsize=(4,3))
+plt.subplot(2,2,1)
+plt.plot(x,y)
+plt.subplot(2,2,3)
+plt.plot(x2,y2)
+17 Lec68 グラフの書き方 (応用編)3 次元プロット
+In [ ]: import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+%matplotlib notebook
+In [ ]: a = np.arange(0,10)
+In [ ]: a
+In [ ]: a.cumsum()
+In [ ]: x = np.random.randn(100).cumsum()
+y = np.random.randn(100).cumsum()
+z = np.random.randn(100).cumsum()
+In [ ]: fig = plt.figure()
+ax = Axes3D(fig)
+ax.plot(x,y,z)
+9
+
+18 Lec69 グラフの書き方 (応用編 2)インタラクティブ
+In [ ]: import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from IPython.html.widgets import interact
+%matplotlib inline
+In [ ]: df_x = pd.read_csv("brownian_x.csv", delimiter=",",encoding="utf-8", index_col= 0)
+df_y = pd.read_csv("brownian_y.csv", delimiter=",",encoding="utf-8", index_col= 0)
+In [ ]: df_x.head()
+In [ ]: @interact(time=(0,500,1))
+def animation(time=0):
+for i in range(df_x.shape[1]):
+plt.scatter(df_x.ix[time,i], df_y.ix[time,i])
+plt.xlim((-100,100))
+plt.ylim((-100,100))
+plt.show()
+
+19 Lec70 グラフの設定
+In [ ]: import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+%matplotlib inline
+In [ ]: df_e = pd.read_excel("data_for_graph.xlsx", sheetname="exp", index_col= 0)
+df_s = pd.read_excel("data_for_graph.xlsx", sheetname="sim", index_col= 0)
+In [ ]: df_e.head()
+In [ ]: plt.scatter(df_e.index, df_e.ix[:,"Number"])
+plt.plot(df_s.index, df_s.ix[:,"Number"])
+In [ ]: df_e
+In [ ]: fig = plt.figure()
+ax1 = fig.add_subplot(1,1,1)
+ax1.scatter(df_e.index, df_e.ix[:,"Number"], label = "exp")
+ax1.plot(df_s.index, df_s.ix[:,"Number"], label = "sim")
+ax1.set_xlabel("Day")
+ax1.set_ylabel("Number")
+ax1.legend(bbox_to_anchor = (1.25,1.0))
+ax2 = ax1.twinx()
+ax2.scatter(df_e.index, df_e.ix[:,"Temp"], color = "red", marker = "^")
+ax2.set_ylim([0, 35])
+ax2.grid(False)
+ax2.set_ylabel("Temp")
+ax1.set_title("Number of microorganism")
+10
+
+20 Lec71 グラフの保存
+In [ ]: import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+In [ ]: x = np.arange(0,100,0.01)
+y = np.sin(x)
+In [ ]: plt.plot(x,y)
+plt.savefig("sample.eps", dpi = 300)
+
+21 Lec73 多項式近似・非線形近似
+In [ ]: import numpy as np
+import scipy as sp
+import matplotlib.pyplot as plt
+from scipy.optimize import curve_fit
+%matplotlib inline
+In [ ]: x = np.arange(10)
+y = 2.0 * x
+y_noise = np.random.randn(10)
+y = y + y_noise
+In [ ]: plt.plot(x,y)
+In [ ]: param = sp.polyfit(x,y, 1)
+In [ ]: param
+In [ ]: x2 = np.arange(15)
+y2 = np.exp(0.5 * x2)
+y2 = y2 + np.random.randn(15)
+In [ ]: plt.plot(x2, y2)
+In [ ]: def nonlinear_fit(x,a,b):
+return a * np.exp(b * x)
+In [ ]: popt, pcov = curve_fit(nonlinear_fit, x2,y2)
+In [ ]: popt
+
+22 Lec74 数値積分
+In [ ]: import numpy as np
+import scipy as sp
+from scipy import integrate
+11
+In [ ]: x = np.arange(-100,100,0.01)
+y = np.exp(-x ** 2)
+In [ ]: s = integrate.simps(y,x=x)
+In [ ]: s
+In [ ]: np.sqrt(np.pi)
+In [ ]: s2 = integrate.cumtrapz(y, dx = 0.01)
+In [ ]: s2
+12

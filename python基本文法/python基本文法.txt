@@ -1,0 +1,373 @@
+Python Data Analysis 1
+September 21, 2017
+1 Lec11 四則演算
+In [ ]: 1.0 + 3
+In [ ]: 2.0 - 1 + 3.0 * 4
+In [ ]: 3.0 / 4.0
+In [ ]: 3.0 // 4.0
+In [ ]: 5.0 / 4.0
+In [ ]: 5.0 // 4.0
+In [ ]: 3.0 % 2.0
+In [ ]: 2.0 ** 3
+In [ ]: 2.0 ** 0.5
+2 Lec12 変数とは・予約語
+In [ ]: a = 1.0
+In [ ]: a
+In [ ]: a = 2.0
+In [ ]: a
+In [ ]: a = a + 1.0
+In [ ]: a
+In [ ]: pi = 3.1415
+In [ ]: 1p = 1.0
+In [ ]: if = 1.0
+In [ ]: pass = 2.0
+In [ ]: print = 3.0
+In [ ]: print("Hello World")
+1
+3 Lec13 変数の型
+In [ ]: num = 3.0
+In [ ]: type(num)
+In [ ]: num2 = 3
+In [ ]: type(num2)
+In [ ]: num3 = 3.0 * 2
+In [ ]: type(num3)
+In [ ]: a = "Python"
+In [ ]: a
+In [ ]: type(a)
+In [ ]: b = "3.5"
+In [ ]: a + b
+In [ ]: 3 * a
+In [ ]: cond = True
+In [ ]: type(cond)
+In [ ]: cond2 = False
+In [ ]: type(cond2)
+4 Lec14 変数の型の変換
+In [ ]: num = 3.0
+In [ ]: type(num)
+In [ ]: num2 = int(num)
+In [ ]: num2
+In [ ]: type(num2)
+In [ ]: moji = str(num)
+In [ ]: moji
+In [ ]: type(moji)
+In [ ]: moji2 = "3.5"
+In [ ]: num3 = float(moji2)
+In [ ]: num3
+In [ ]: moji3 = "Python"
+In [ ]: int(moji3)
+2
+5 Lec15 リストとは
+In [ ]: num_list = [1,2,3]
+In [ ]: num_list[0]
+In [ ]: num_list[1]
+In [ ]: num_list[-1]
+In [ ]: len(num_list)
+In [ ]: general_list = [1,"Python", 3.0]
+In [ ]: general_list
+6 Lec16 リストのインデックス・スライス
+In [ ]: num_list = [1,2,3,4,5,6,7,8,9]
+In [ ]: num_list[0]
+In [ ]: num_list[1]
+In [ ]: num_list[-1]
+In [ ]: num_list[-2]
+In [ ]: num_list[0:4]
+In [ ]: num_list[1:3]
+In [ ]: num_list[4:]
+In [ ]: num_list[-3:]
+7 Lec17 文字列
+In [ ]: moji = "Python3.5"
+In [ ]: moji
+In [ ]: moji[0]
+In [ ]: moji[-1]
+In [ ]: moji[1:4]
+In [ ]: moji2 = "Hello\tWorld"
+In [ ]: moji2
+In [ ]: print(moji2)
+In [ ]: moji3 = "Hello\tWorld\n"
+In [ ]: print(moji3)
+3
+8 Lec18 リストの操作【追加・削除・演算】
+In [ ]: num_list = []
+In [ ]: num_list.append(0)
+In [ ]: num_list
+In [ ]: num_list.append(1)
+In [ ]: num_list
+In [ ]: num_list.extend([3,5,3,6,5])
+In [ ]: num_list
+In [ ]: num_list.pop()
+In [ ]: num_list
+In [ ]: num_list.remove(1)
+In [ ]: num_list
+In [ ]: sum(num_list)
+In [ ]: num_list.sort()
+In [ ]: num_list
+9 Lec19 リストの操作【文字列の操作】
+In [ ]: ProgLang = "Python-C-Java-Perl \n"
+In [ ]: ProgLang
+In [ ]: ProgLang2 = ProgLang.strip()
+In [ ]: ProgLang2.find("Java")
+In [ ]: ProgLang2.find("C++")
+In [ ]: "Perl" in ProgLang2
+In [ ]: ProgLang3 = ProgLang2.replace("C", "C++")
+In [ ]: ProgList = ProgLang3.split("-")
+In [ ]: ProgList
+In [ ]: ",".join(ProgList)
+4
+10 Lec20 タプルとは
+In [ ]: num_list = [1,2,3,4]
+In [ ]: num_tuple = (1,2,3,4)
+In [ ]: num_list[0] = 5
+In [ ]: num_list
+In [ ]: num_tuple[0] = 5
+In [ ]: list(num_tuple)
+In [ ]: tuple(num_list)
+11 Lec21 ディクショナリとは
+In [ ]: num_list = [1,2,3,4]
+In [ ]: num_list[0]
+In [ ]: kyushu_pop = [504, 120, 182]
+In [ ]: kyushu_pop_dict = {"Fukuoka":504, "Oita":120, "Kumamoto": 182}
+In [ ]: kyushu_pop_dict
+In [ ]: kyushu_pop_dict["Fukuoka"]
+In [ ]: kyushu_pop_dict["Oita"]
+In [ ]: kyushu_pop_dict.keys()
+In [ ]: kyushu_pop_dict.values()
+12 Lec22 コメントとは
+In [ ]: #1.0 + 3.0
+In [ ]: #pi は円周率、r は円の半径、S は円の面積
+pi = 3.14
+r = 1.0
+S = pi * r ** 2
+13 Lec23 print 関数の使い方
+In [ ]: print("Hello World")
+In [ ]: a = 3.0
+print(a)
+In [ ]: num_list = [1,2,3,4]
+print(num_list)
+5
+14 Lec25 input 関数の使い方
+In [ ]: pi = 3.14
+In [ ]: r = 5.0
+In [ ]: S = pi * r ** 2
+In [ ]: r = float(input("input radius: "))
+In [ ]: r
+In [ ]: type(r)
+In [ ]: S
+15 Lec27 比較演算子・論理演算子
+In [ ]: score = 60
+In [ ]: score >= 60
+In [ ]: score > 60
+In [ ]: score <= 60
+In [ ]: score == 60
+In [ ]: score == 60 and score % 2 == 0
+In [ ]: score == 60 and score % 2 == 1
+In [ ]: score == 60 or score % 2 == 1
+In [ ]: not score == 60
+16 Lec28 if 文
+In [ ]: sample_num = 4
+In [ ]: if sample_num % 2 == 0:
+print(sample_num, "is even.")
+else :
+pass
+In [ ]: sample_num = 7
+if sample_num % 2 == 0:
+print(sample_num, "is even.")
+elif sample_num == 7:
+print("This is a luckey number.")
+else :
+pass
+6
+17 Lec29 繰り返し (for ループ)
+In [ ]: print(0)
+print(1)
+print(2)
+print(3)
+print(4)
+print(5)
+In [ ]: num_list = [0,1,2,3,4,5]
+In [ ]: for i in num_list:
+print(i)
+In [ ]: for i in range(6):
+print(i)
+In [ ]: for i in range(1,6):
+print(i)
+In [ ]: for i in range(1,12,2):
+print(i)
+18 Lec30 enumerate
+In [ ]: for i in range(6):
+print(i)
+In [ ]: subject_list = ["Japanese", "English", "Math", "Science", "Society"]
+In [ ]: for i in subject_list:
+print(i)
+In [ ]: for i,j in enumerate(subject_list):
+print(i,j)
+19 Lec31 continue・break
+In [ ]: for i in range(20):
+print(i)
+In [ ]: for i in range(20):
+if i % 2 == 0:
+continue
+else:
+print(i)
+7
+In [ ]: print("start for loop")
+for i in range(20):
+if i % 2 == 0:
+continue
+elif i > 15:
+break
+else:
+print(i)
+print("end for loop")
+
+20 Lec32 while 分の使い方
+In [ ]: condition = True
+while condition:
+price = float(input("Please input price: "))
+print(1.08 * price)
+answer = input("continue? [yes:y no:n]: ")
+if answer == "n":
+condition = False
+
+21 Lec33 ファイルの読み込み
+In [ ]: fileName = "sample.txt"
+f = open(fileName, mode = "r", encoding= "utf-8")
+for i in f:
+print(i)
+In [ ]: fileName = "sample.txt"
+f = open(fileName, mode = "r", encoding= "utf-8")
+for i,j in enumerate(f):
+k = j.strip()
+if i > 0:
+print(i,k)
+In [ ]: fileName = "sample.txt"
+data = []
+f = open(fileName, mode = "r", encoding= "utf-8")
+for i,j in enumerate(f):
+k = j.strip()
+if i > 0:
+temp = k.split("\t")
+data.append(temp[1])
+In [ ]: data
+In [ ]: f.close()
+
+8
+22 Lec34 ファイルの出力
+In [ ]: fileName = "output.txt"
+f = open(fileName, mode = "w", encoding= "utf-8")
+In [ ]: for i in range(10):
+f.write(str(i) + "\n")
+In [ ]: f.close()
+
+23 Lec35 with
+In [ ]: f = open("sample.txt", mode = "r", encoding= "utf-8")
+In [ ]: f.close()
+In [ ]: with open("sample.txt", mode = "r", encoding= "utf-8") as f:
+for i in f:
+print(i)
+
+24 Lec37 関数の定義
+In [ ]: def distance(x,y,z):
+dis = (x ** 2 + y ** 2 + z ** 2) ** 0.5
+return dis
+In [ ]: distance(3.0, 1.0, 2.0)
+
+25 Lec 38 変数のスコープ
+In [ ]: x = 3.0
+In [ ]: def func1():
+print(x)
+return
+In [ ]: func1()
+In [ ]: def func2(x):
+y = 1.0
+return(x + y)
+In [ ]: func2(x)
+In [ ]: y
+9
+
+26 Lec39 デフォルト引数
+In [ ]: def distance(x=1.0,y=2.0,z=3.0):
+dis = (x ** 2 + y ** 2 + z ** 2) ** 0.5
+return dis
+In [ ]: distance()
+In [ ]: distance(3.0)
+27 Lec40 無名関数 (ラムダ式)
+In [ ]: def distance(x,y,z):
+dis = (x ** 2 + y ** 2 + z ** 2) ** 0.5
+return dis
+In [ ]: func1 = lambda x : x ** 2
+In [ ]: func1(3.0)
+
+28 Lec41 map,filter
+In [ ]: num_list = [1,2,3,4,5,6,7,8]
+In [ ]: func = lambda x : x ** 2
+In [ ]: list(map(func, num_list))
+In [ ]: fileList = ["aaa.txt", "bbb.csv", "ccc.xlsx"]
+In [ ]: func2 = lambda x : x[-4:] == ".txt"
+In [ ]: list(filter(func2, fileList))
+
+29 Lec43 モジュールの import
+In [ ]: import numpy
+In [ ]: numpy.abs(-3.0)
+In [ ]: numpy.random.rand()
+In [ ]: import numpy as np
+In [ ]: np.random.rand()
+In [ ]: from numpy import random
+In [ ]: random.rand()
+In [ ]: from numpy import *
+In [ ]: def abs
+10
+
+30 Lec44 OS モジュール
+In [ ]: import os
+In [ ]: c_path = os.getcwd()
+In [ ]: fileList = os.listdir(c_path)
+In [ ]: for i,j in enumerate(fileList):
+if j[-4:] == ".txt":
+print(i,j)
+In [ ]: os.mkdir("test")
+In [ ]: os.listdir(c_path)
+In [ ]: os.rmdir("test")
+In [ ]: os.listdir(c_path)
+
+31 Lec45 リスト内包表記
+In [ ]: for i in range(10):
+print(i)
+In [ ]: num_list = []
+for i in range(11):
+num_list.append(i ** 2)
+In [ ]: num_list
+In [ ]: num_list = [i ** 2 for i in range(11)]
+In [ ]: num_list
+In [ ]: import os
+In [ ]: c_path = os.getcwd()
+In [ ]: fileList = os.listdir(c_path)
+In [ ]: fileList
+In [ ]: txtList = [i for i in fileList if i[-4:] == ".txt"]
+In [ ]: txtList
+11
+
+32 Lec47 正規表現 (基礎編)
+In [ ]: import re
+In [ ]: print("a\tb\tc")
+In [ ]: print(r"a\tb\tc")
+In [ ]: re.search(r"123", "123456")
+In [ ]: re.search(r"1*", "1")
+In [ ]: re.search(r"1*", "111111111")
+In [ ]: re.search(r"1\s23", "1 23")
+In [ ]: re.search(r"^123", "abc123")
+In [ ]: re.search(r"123$", "abc123")
+In [ ]: re.search("[123]456", "1456")
+In [ ]: re.search("[pP]ython","Python")
+In [ ]: re.search("[123]456", "1456")
+In [ ]: re.search("[pP]ython","Python")
+In [ ]: re.search("[pP]ython3?","Python")
+In [ ]: re.search("[pP]ython3?","Python3")
+In [ ]: re.search("[pP]ython(2|3)?","Python2")
+
+33 Lec 48 正規表現 (実践編)
+In [ ]: import re
+In [ ]: obj1 = "-3.01E-10 1.0000123 1.051E1"
+In [ ]: re.findall(r"-?\d\.", obj1)
+In [ ]: re.findall(r"-?\d\.\d*", obj1)
+In [ ]: re.findall(r"-?\d\.\d*E?-?\d?\d?", obj1)
+12

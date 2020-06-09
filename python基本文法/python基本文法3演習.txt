@@ -1,0 +1,166 @@
+test
+October 2, 2017
+1 Lec76 演習１：実験データの回帰直線
+In [ ]: import numpy as np
+import pandas as pd
+import scipy as sp
+import matplotlib.pyplot as plt
+import seaborn as sns
+%matplotlib inline
+In [ ]: df = pd.read_excel("linear_approximation.xlsx", header = 6,
+index_col= 0, sheetname= "Sheet1")
+In [ ]: df.head()
+In [ ]: df_list = []
+for i in range(1, 6):
+df = pd.read_excel("linear_approximation.xlsx",
+header = 6, index_col= 0, sheetname= "Sheet"+str(i))
+df_list.append(df)
+In [ ]: df_list[0]
+In [ ]: df_list[1]
+In [ ]: plt.plot(df_list[0].index, df_list[0].ix[:,"Number"])
+In [ ]: label_list = ["10W", "20W", "40W", "60W", "80W"]
+for i in range(5):
+plt.plot(df_list[i].index, df_list[i].ix[:,"Number"], label = label_list[i])
+plt.legend()
+In [ ]: param = sp.polyfit(df_list[0].index, df_list[0].ix[:,"Number"], 1)
+In [ ]: param
+In [ ]: p_list = []
+p_list.append(0)
+for i in range(5):
+param = sp.polyfit(df_list[i].index, df_list[i].ix[:,"Number"], 1)
+p_list.append(np.abs(param[0]))
+1
+In [ ]: p_list
+In [ ]: x_list = [0, 10, 20, 40, 60, 80]
+plt.scatter(x_list, p_list)
+In [ ]: a = sp.polyfit(x_list[:3], p_list[:3], 1)
+In [ ]: a
+In [ ]: plt.scatter(x_list, p_list)
+x2 = np.arange(0, 80, 1)
+plt.plot(x2, a[0] * x2)
+
+2 Lec77 演習 2：スペクトルのフィッティング、積分
+In [ ]: import pandas as pd
+import numpy as np
+import scipy as sp
+from scipy.integrate import cumtrapz
+from IPython.html.widgets import interact
+import matplotlib.pyplot as plt
+import seaborn as sns
+%matplotlib inline
+In [ ]: df = pd.read_excel("spectrum.xlsx", header= None)
+In [ ]: df.head()
+In [ ]: df2 = df.rename(columns={0:"lambda", 1:"Intensity"})
+In [ ]: df2.head()
+In [ ]: plt.plot(df2.ix[:,"lambda"], df2.ix[:,"Intensity"])
+In [ ]: y_int = cumtrapz(df2.ix[:,"Intensity"], df2.ix[:,"lambda"], initial=0)
+In [ ]: y_int.shape
+In [ ]: df2.shape
+In [ ]: plt.plot(df2.ix[:,"lambda"], y_int)
+In [ ]: @interact(Intensity=(0,200,0.5), x0=(370,400,0.5), sigma=(0,10,0.5))
+def fit_func(Intensity,x0,sigma):
+x = np.arange(350, 440, 0.001)
+y = Intensity * (x0 - x) * sigma * np.exp(-0.5*(x-x0)**2/ sigma**2)
+plt.plot(df2.ix[:,"lambda"], df2.ix[:,"Intensity"])
+plt.plot(x,y)
+plt.show()
+2
+In [ ]: Intensity = 83.50
+x0 = 396.0
+sigma = 4.0
+x = np.arange(300,440, 0.001)
+y = Intensity * (x0 - x) * sigma * np.exp(-0.5*(x-x0)**2/ sigma**2)
+In [ ]: plt.plot(x, y)
+plt.xlim((360,440))
+In [ ]: y_int2 = cumtrapz(y, x, initial=0)
+In [ ]: y_int3 = cumtrapz(y_int2, x, initial=0)
+In [ ]: y_int3
+In [ ]: plt.plot(x,y_int3)
+
+3 Lec78 演習３：テキストデータの取り扱い、線形近似、非線形近似
+In [ ]: import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from scipy.optimize import curve_fit
+%matplotlib inline
+In [ ]: df = pd.read_csv("sensor_data.txt", delimiter="\t", header= 6)
+In [ ]: df.head()
+In [ ]: df["Time[s]"] = df["Time[s]"].apply(lambda x: float(x[1:-1]))
+In [ ]: df.head()
+In [ ]: plt.plot(df["Time[s]"], df["Intensity[a.u.]"])
+In [ ]: data = df.ix[:250, "Intensity[a.u.]"]
+In [ ]: data
+In [ ]: sns.distplot(data)
+In [ ]: data.describe()
+In [ ]: def linear_fit(x,a,b):
+return a * x + b
+In [ ]: param, cov = curve_fit(linear_fit, df["Time[s]"], df["Intensity[a.u.]"])
+In [ ]: param
+3
+In [ ]: plt.plot(df["Time[s]"], df["Intensity[a.u.]"], label = "raw data")
+x = np.arange(0, 1750, 0.01)
+y = param[0] * x + param[1]
+plt.plot(x,y, label = "linear", color = "red")
+plt.legend()
+In [ ]: x = np.arange(-10, 10, 0.01)
+y = 1.0 / (np.exp(-x) + 1.0)
+plt.plot(x,y)
+In [ ]: def nonlinear_fit(x,a,b,c,d):
+return a / (np.exp(-b*x+c) + 1.0) + d
+In [ ]: param2, cov2 = curve_fit(nonlinear_fit, df["Time[s]"], df["Intensity[a.u.]"])
+In [ ]: plt.plot(df["Time[s]"], df["Intensity[a.u.]"], label = "raw data")
+x = np.arange(0, 1750, 0.01)
+y = param2[0] / (np.exp(-param2[1]*x+param2[2]) + 1.0) + param2[3]
+plt.plot(x,y, label = "nonlinear", color = "red")
+plt.legend()
+
+4 Lec79_80 演習４：実験、SIM データの比較・決定係数の算出
+In [ ]: import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+%matplotlib inline
+In [ ]: df_sim = pd.read_csv("SIM(Reaction)_1.csv", delimiter=",", header= 9, index_col=0)
+df_sim2 = pd.read_csv("SIM(Reaction)_2.csv", delimiter=",", header= 9, index_col=0)
+In [ ]: df_sim.head()
+In [ ]: df_sim3 = pd.concat([df_sim, df_sim2])
+In [ ]: df_sim3
+In [ ]: df_ex = pd.read_excel("exp(Reaction).xlsx", sheetname="Sheet1",
+header = 5, index_col = 0)
+df_ex2 = pd.read_excel("exp(Reaction).xlsx", sheetname="Sheet2",
+header = 5, index_col = 0)
+df_ex3 = pd.read_excel("exp(Reaction).xlsx", sheetname="Sheet3",
+header = 5, index_col = 0)
+In [ ]: df_ex.head()
+In [ ]: df_ex_list = []
+df_ex_list.append(df_ex)
+df_ex_list.append(df_ex2)
+df_ex_list.append(df_ex3)
+4
+In [ ]: len(df_ex_list)
+In [ ]: species = ["A", "B", "C", "D"]
+plt.figure(figsize=(12,9))
+for i,j in enumerate(df_ex_list):
+plt.subplot(2,2,i+1)
+df = j
+for k in species:
+plt.scatter(df.index, df[k+"(exp)"], label="")
+plt.plot(df_sim3.index, df_sim3[k])
+plt.legend()
+In [ ]: df_ex4 = pd.concat([df_ex, df_ex2, df_ex3], axis=1)
+In [ ]: df_ex4.head()
+In [ ]: df_ex5 = pd.DataFrame([], index = df_ex4.index)
+In [ ]: df_ex5.head()
+In [ ]: df_r = df_ex5.join(df_sim3)
+In [ ]: df_r.head()
+In [ ]: diff_list = []
+for i,j in enumerate(species):
+diff = (df_r[j+"(exp)"] - df_r[j]) ** 2
+diff_list.append(diff.sum())
+In [ ]: diff_list
+In [ ]: norm = df_ex5.var(ddof=False) * df_ex5.shape[0]
+In [ ]: norm
+In [ ]: for i,j in enumerate(species):
+print(j, 1.0 - diff_list[i] / norm[i])
+5
